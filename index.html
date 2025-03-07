@@ -16,11 +16,59 @@
             font-family: Arial, sans-serif;
             background-color: #ffd6e6;
             overflow: hidden;
+            transition: background-color 1s ease;
+            position: relative;
+        }
+        body::before {
+            content: '🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            font-size: 30px;
+            opacity: 0.2;
+            pointer-events: none;
+            z-index: 0;
+            animation: moveTomatoes 25s linear infinite;
+            white-space: pre;
+            line-height: 1.8;
+            letter-spacing: 5px;
+            text-align: center;
+        }
+        body::after {
+            content: '🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅\A🍅 🍅 🍅 🍅 🍅 🍅';
+            position: fixed;
+            top: 100%;
+            left: 0;
+            right: 0;
+            font-size: 30px;
+            opacity: 0.2;
+            pointer-events: none;
+            z-index: 0;
+            animation: moveTomatoes 25s linear infinite;
+            white-space: pre;
+            line-height: 1.8;
+            letter-spacing: 5px;
+            text-align: center;
+            animation-delay: -12.5s;
+        }
+        @keyframes moveTomatoes {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-100%);
+            }
         }
         .container {
             text-align: center;
             width: 100%;
             padding: 20px;
+            transition: opacity 0.5s ease;
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 214, 230, 0.7);
+            border-radius: 20px;
         }
         h1 {
             color: #ff4d94;
@@ -63,16 +111,133 @@
         button:hover {
             filter: brightness(1.1);
         }
-        #resetBtn {
+        #resetBtn, #surpriseBtn {
             display: none;
             font-size: 2em;
             color: #ff4d94;
             cursor: pointer;
-            margin-top: 20px;
+            margin: 20px 10px;
         }
-        #resetBtn:hover {
+        #resetBtn:hover, #surpriseBtn:hover {
             transform: rotate(180deg);
             transition: transform 0.5s ease;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #flowerContainer {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            display: none;
+            transition: transform 1s ease;
+            width: 300px;
+            height: 400px;
+        }
+        .stem {
+            position: absolute;
+            width: 8px;
+            height: 200px;
+            background: linear-gradient(to right, #2d5a27, #3a7a33);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+        .leaf {
+            position: absolute;
+            width: 40px;
+            height: 20px;
+            background: linear-gradient(45deg, #3a7a33, #4a9a43);
+            border-radius: 0 50% 50% 0;
+            bottom: 60px;
+            left: 50%;
+            transform-origin: left center;
+            transform: rotate(30deg);
+            opacity: 0;
+            transition: all 0.8s ease;
+        }
+        .leaf:nth-child(2) {
+            bottom: 100px;
+            transform: scaleX(-1) rotate(30deg);
+            left: 50%;
+        }
+        .flower-head {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 120px;
+        }
+        .petal {
+            position: absolute;
+            width: 40px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff69b4, #ff99cc);
+            border-radius: 40px 0;
+            opacity: 0;
+            transition: all 0.8s ease;
+            box-shadow: 0 0 10px rgba(255, 105, 180, 0.3);
+            transform-origin: bottom center;
+            left: 40px;
+            top: 30px;
+        }
+        .center {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, #ffeb3b, #ffc107);
+            border-radius: 50%;
+            left: 40px;
+            top: 40px;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+        }
+        .heart {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff1493, #ff4d94);
+            transform: rotate(45deg) scale(0);
+            opacity: 0;
+            transition: all 1s ease;
+            box-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
+            top: 20px;
+            right: -40px;
+        }
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: inherit;
+            border-radius: 50%;
+            box-shadow: inherit;
+        }
+        .heart::before {
+            left: -30px;
+        }
+        .heart::after {
+            top: -30px;
+        }
+        .message {
+            position: fixed;
+            top: 85%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ff1493;
+            font-size: 2em;
+            opacity: 0;
+            transition: opacity 1s ease;
+            text-shadow: 2px 2px 4px rgba(255, 20, 147, 0.3);
         }
     </style>
 </head>
@@ -85,8 +250,22 @@
                 <button id="noBtn">No</button>
             </div>
         </div>
-        <i class="fas fa-redo-alt" id="resetBtn"></i>
+        <div class="button-container">
+            <i class="fas fa-redo-alt" id="resetBtn"></i>
+            <button id="surpriseBtn" style="background: none; border: none;">¿Quieres una sorpresa? 🎁</button>
+        </div>
     </div>
+
+    <div id="flowerContainer">
+        <div class="stem"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="flower-head">
+            <div class="center"></div>
+        </div>
+        <div class="heart"></div>
+    </div>
+    <div class="message" id="loveMessage">Te amo con todo mi corazón ❤️</div>
 
     <script>
         let noCount = 0;
@@ -95,6 +274,11 @@
         const titulo = document.querySelector('h1');
         const gameButtons = document.getElementById('gameButtons');
         const resetBtn = document.getElementById('resetBtn');
+        const surpriseBtn = document.getElementById('surpriseBtn');
+        const flowerContainer = document.getElementById('flowerContainer');
+        const flowerHead = document.querySelector('.flower-head');
+        const loveMessage = document.getElementById('loveMessage');
+        const container = document.querySelector('.container');
         
         siBtn.addEventListener('click', () => {
             gameButtons.style.display = 'none';
@@ -104,6 +288,7 @@
                 titulo.textContent = 'La gracia es que le dieras no para ver el juego 😅';
             } else if (noCount >= 2) {
                 titulo.textContent = 'Te haces de rogar tú ❤️';
+                surpriseBtn.style.display = 'block';
             } else {
                 titulo.textContent = '¡Gracias por tu amor! ❤️';
             }
@@ -119,14 +304,93 @@
         });
 
         resetBtn.addEventListener('click', () => {
+            document.body.style.backgroundColor = '#ffd6e6';
             titulo.textContent = '¿Me amas?';
             gameButtons.style.display = 'flex';
             resetBtn.style.display = 'none';
+            surpriseBtn.style.display = 'none';
+            flowerContainer.style.display = 'none';
+            loveMessage.style.opacity = '0';
+            container.style.opacity = '1';
             noCount = 0;
             siBtn.style.transform = 'scale(1)';
             siBtn.style.fontSize = '1.2em';
             noBtn.style.transform = 'translateX(0)';
+            
+            // Reset flower animation
+            const petals = document.querySelectorAll('.petal');
+            petals.forEach(petal => petal.remove());
+            document.querySelector('.heart').style.opacity = '0';
+            document.querySelector('.heart').style.transform = 'rotate(45deg) scale(0)';
+            document.querySelector('.stem').style.opacity = '0';
+            document.querySelector('.center').style.opacity = '0';
+            document.querySelectorAll('.leaf').forEach(leaf => leaf.style.opacity = '0');
+            flowerContainer.style.transform = 'translate(-50%, -50%) scale(0)';
         });
+
+        surpriseBtn.addEventListener('click', () => {
+            // Hide all other elements
+            container.style.opacity = '0';
+            document.body.style.backgroundColor = '#ffe6f2';
+            
+            setTimeout(() => {
+                flowerContainer.style.display = 'block';
+                flowerContainer.style.transform = 'translate(-50%, -50%) scale(1)';
+                
+                // Show stem first
+                setTimeout(() => {
+                    document.querySelector('.stem').style.opacity = '1';
+                }, 500);
+
+                // Show leaves
+                setTimeout(() => {
+                    document.querySelectorAll('.leaf').forEach((leaf, i) => {
+                        setTimeout(() => {
+                            leaf.style.opacity = '1';
+                        }, i * 300);
+                    });
+                }, 1000);
+                
+                // Create and animate petals with a more realistic flower pattern
+                setTimeout(() => {
+                    for (let i = 0; i < 8; i++) {
+                        const petal = document.createElement('div');
+                        petal.className = 'petal';
+                        const angle = i * 45;
+                        petal.style.transform = `rotate(${angle}deg)`;
+                        flowerHead.appendChild(petal);
+                        
+                        setTimeout(() => {
+                            petal.style.opacity = '1';
+                        }, i * 150);
+                    }
+                }, 1800);
+
+                // Show flower center
+                setTimeout(() => {
+                    document.querySelector('.center').style.opacity = '1';
+                }, 3000);
+                
+                // Animate heart with a more dramatic entrance
+                setTimeout(() => {
+                    const heart = document.querySelector('.heart');
+                    heart.style.opacity = '1';
+                    heart.style.transform = 'rotate(45deg) scale(1)';
+                }, 3500);
+
+                // Show love message
+                setTimeout(() => {
+                    loveMessage.style.opacity = '1';
+                }, 4000);
+            }, 500);
+        });
+
+        // Create tomato background
+        const createTomatoBackground = () => {
+            const body = document.body;
+            body.style.setProperty('--tomato-content', "'🍅 '.repeat(400)");
+        };
+        createTomatoBackground();
     </script>
 </body>
 </html>
